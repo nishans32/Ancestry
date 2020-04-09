@@ -56,6 +56,7 @@ namespace Ancestry.Api
                 app.UseHsts();
             }
 
+            app.UseMiddleware<GlobalExceptionHandler>();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
