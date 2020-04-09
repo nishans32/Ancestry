@@ -5,8 +5,7 @@ using System.Text;
 using Ancestry.Common.Dtos;
 using Ancestry.Common.Models;
 using Ancestry.Common.Services;
-using Ancestry.Common.Store;
-using Microsoft.Extensions.Options;
+
 
 namespace Ancestry.Common.Repo
 {
