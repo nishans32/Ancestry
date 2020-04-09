@@ -8,23 +8,23 @@ using Ancestry.Common.Repo;
 
 namespace Ancestry.Common.Services
 {
-    public class PeopleService: IPersonService
+    public class PeopleService: IPeopleService
     {
-        private readonly IPersonRepo _personRepo;
+        private readonly IPeopleRepo _peopleRepo;
         private readonly IPlaceRepo _placeRepo;
 
-        public PeopleService(IPersonRepo personRepo, IPlaceRepo placeRepo)
+        public PeopleService(IPeopleRepo peopleRepo, IPlaceRepo placeRepo)
         {
-            _personRepo = personRepo;
+            _peopleRepo = peopleRepo;
             _placeRepo = placeRepo;
         }
 
         public PersonDto Get(int id)
         {
-            var person = _personRepo.Get(id);
+            var person = _peopleRepo.Get(id);
 
-            var mother = _personRepo.Get(person.MotherId);
-            var father = _personRepo.Get(person.FatherId);
+            var mother = _peopleRepo.Get(person.MotherId);
+            var father = _peopleRepo.Get(person.FatherId);
             var place = _placeRepo.Get(person.PlaceId);
 
             //Todo - use a mapper
@@ -52,7 +52,7 @@ namespace Ancestry.Common.Services
         public SearchResultDto<PersonDto> Search(string name, string gender, int index, int count)
         {
             //todo - Use a mapper
-            var result = _personRepo.Search(new PersonSearchCriteria
+            var result = _peopleRepo.Search(new PersonSearchCriteria
             {
                 Name = name,
                 Gender = gender,
@@ -64,8 +64,8 @@ namespace Ancestry.Common.Services
             {
                 Results = result.Results.Select(person =>
                 {
-                    var mother = _personRepo.Get(person.MotherId);
-                    var father = _personRepo.Get(person.FatherId);
+                    var mother = _peopleRepo.Get(person.MotherId);
+                    var father = _peopleRepo.Get(person.FatherId);
                     var place = _placeRepo.Get(person.PlaceId);
 
                     return new PersonDto
@@ -93,7 +93,7 @@ namespace Ancestry.Common.Services
         }
     }
 
-    public interface IPersonService
+    public interface IPeopleService
     {
         PersonDto Get(int id);
         SearchResultDto<PersonDto> Search(string name, string gender, int index, int count);

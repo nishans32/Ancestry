@@ -13,16 +13,16 @@ namespace Ancestry.Api.Controllers
     public class PersonController : ControllerBase
     {
         //Todo - Add a global exception handler
-        private readonly IPersonService _personService;
-        public PersonController(IPersonService personService)
+        private readonly IPeopleService _peopleService;
+        public PersonController(IPeopleService peopleService)
         {
-            _personService = personService;
+            _peopleService = peopleService;
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var person = _personService.Get(id);
+            var person = _peopleService.Get(id);
             return person != null
                 ? (IActionResult) Ok(person)
                 : NotFound();
@@ -32,7 +32,7 @@ namespace Ancestry.Api.Controllers
         [Route("search/{name}")]
         public IActionResult Search(string name, string gender, int index, int count)
         {
-            var result = _personService.Search(name, gender, index, count);
+            var result = _peopleService.Search(name, gender, index, count);
             return result.TotalCount != 0
                 ? (IActionResult) Ok(result)
                 : NotFound();
