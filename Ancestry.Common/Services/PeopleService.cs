@@ -76,15 +76,15 @@ namespace Ancestry.Common.Services
                         Level = person.Level,
                         Place = new PlaceDto
                         {
-                            Name = place.Name
+                            Name = place?.Name
                         },
                         Father = new PersonDto
                         {
-                            Name = father.Name
+                            Name = father?.Name
                         },
                         Mother = new PersonDto
                         {
-                            Name = mother.Name
+                            Name = mother?.Name
                         }
                     };
                 }).ToList(),
