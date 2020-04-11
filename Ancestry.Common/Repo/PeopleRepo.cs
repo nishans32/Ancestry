@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using Ancestry.Common.Dtos;
@@ -34,10 +35,27 @@ namespace Ancestry.Common.Repo
         public SearchResult<Person> Search(PersonSearchCriteria searchCriteria)
         {
             var result = searchCriteria.Gender == null
-                ? _peopleStore.Data.Where(p => p.Name == searchCriteria.Name).ToList()
+                ? _peopleStore.Data.Where(p => p.Name.ToLower().StartsWith(searchCriteria.Name.ToLower())).ToList()
                 : _peopleStore.Data.Where(p =>
-                    p.Name == searchCriteria.Name
+                    p.Name.ToLower().StartsWith(searchCriteria.Name.ToLower())
                     && p.Gender == searchCriteria.Gender).ToList();
+
+            if (searchCriteria.Index > result.Count)
+                return new SearchResult<Person>
+                {
+                    Count = result.Count,
+                    Results = new List<Person>()
+                };
+
+            if (searchCriteria.Index + searchCriteria.Count > result.Count)
+            {
+                return new SearchResult<Person>
+                {
+                    Count = result.Count,
+                    Results = result.GetRange(searchCriteria.Index, 
+                        result.Count - searchCriteria.Index)
+                };
+            }
 
             return new SearchResult<Person>
             {
