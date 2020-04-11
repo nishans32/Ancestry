@@ -15,4 +15,13 @@
     <ProjectReference Include="..\Ancestry.Common\Ancestry.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="locations_large.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="people_large.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
