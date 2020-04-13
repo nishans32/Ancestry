@@ -23,8 +23,14 @@ namespace Ancestry.Common.Services
         {
             var person = _peopleRepo.Get(id);
 
-            var mother = _peopleRepo.Get(person.MotherId);
-            var father = _peopleRepo.Get(person.FatherId);
+            var mother = person.MotherId != null
+                ?_peopleRepo.Get(person.MotherId.Value)
+                :null;
+
+            var father = person.FatherId != null
+                ? _peopleRepo.Get(person.FatherId.Value)
+                : null;
+
             var place = _placeRepo.Get(person.PlaceId);
 
             //Todo - use a mapper
@@ -64,8 +70,14 @@ namespace Ancestry.Common.Services
             {
                 Results = result.Results.Select(person =>
                 {
-                    var mother = _peopleRepo.Get(person.MotherId);
-                    var father = _peopleRepo.Get(person.FatherId);
+                    var mother = person.FatherId != null
+                        ? _peopleRepo.Get(person.FatherId.Value)
+                        : null;
+
+                    var father = person.FatherId != null
+                        ?_peopleRepo.Get(person.FatherId.Value)
+                        :null;
+
                     var place = _placeRepo.Get(person.PlaceId);
 
                     return new PersonDto
