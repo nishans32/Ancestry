@@ -1,16 +1,22 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Ancestry.Common.Models;
 using Ancestry.Common.Repo;
 using Ancestry.Common.Services;
 using Ancestry.Common.Store;
+using Ancestry.Tests.Models;
+using Ancestry.Tests.Services;
 using Castle.Components.DictionaryAdapter;
 using Microsoft.Extensions.Options;
 using NSubstitute;
+using NSubstitute.Routing.Handlers;
 using Xunit;
+using Xunit.Sdk;
 
-namespace Ancestry.Tests.Ancestry.Common.Repo
+
+namespace Ancestry.Tests.Common.Repo
 {
     public class PeopleRepoTests
     {
@@ -70,6 +76,8 @@ namespace Ancestry.Tests.Ancestry.Common.Repo
         public void SearchPerson_IncorrectName_returnsNull()
         {
             //Arrange
+            SearchResult<Person> expectedResult = null;
+
             _peopleStore.Data.Returns(new EditableList<Person>
             {
                 new Person
@@ -85,7 +93,33 @@ namespace Ancestry.Tests.Ancestry.Common.Repo
             });
 
             //Assert
-            Assert.True(result==null);
+            Assert.True(result==expectedResult);
         }
+
+        [Theory]
+        [MemberData(nameof(GetPersonSearchTestData))]
+        public void SearchPerson_Parameters_FilterCorrectly(PeopleRepoSearchTestData testData)
+        {
+            //Arrange
+            var expectedResult = testData.ExpectedResult;
+
+            _peopleStore.Data.Returns(testData.EnforcedResult);
+
+            //Act
+            var result = _peopleRepo.Search(testData.SearchCriteria);
+            
+            //Assert
+            Assert.True(expectedResult.Count == result.Count);
+
+        }
+
+        public static IEnumerable<object[]> GetPersonSearchTestData()
+        {
+            return TestDataProvider.GetPersonRepoSearchTestData();
+        }
+
+
+
+
     }
 }

@@ -70,8 +70,8 @@ namespace Ancestry.Common.Services
             {
                 Results = result.Results.Select(person =>
                 {
-                    var mother = person.FatherId != null
-                        ? _peopleRepo.Get(person.FatherId.Value)
+                    var mother = person.MotherId != null
+                        ? _peopleRepo.Get(person.MotherId.Value)
                         : null;
 
                     var father = person.FatherId != null
