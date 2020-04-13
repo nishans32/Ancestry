@@ -7,6 +7,7 @@ using Ancestry.Common.Dtos;
 using Ancestry.Common.Models;
 using Ancestry.Common.Services;
 using Ancestry.Common.Store;
+using Castle.Core.Internal;
 using Microsoft.Extensions.Options;
 
 
@@ -34,7 +35,7 @@ namespace Ancestry.Common.Repo
 
         public SearchResult<Person> Search(PersonSearchCriteria searchCriteria)
         {
-            var result = searchCriteria.Gender == null
+            var result = searchCriteria.Gender.IsNullOrEmpty()
                 ? _peopleStore.Data.Where(p => p.Name.ToLower().StartsWith(searchCriteria.Name.ToLower())).ToList()
                 : _peopleStore.Data.Where(p =>
                     p.Name.ToLower().StartsWith(searchCriteria.Name.ToLower())
