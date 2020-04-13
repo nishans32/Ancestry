@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ancestry.Api", "Ancestry.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ancestry.Common", "Ancestry.Common\Ancestry.Common.csproj", "{36AC43F7-4F0B-43C3-8E45-50DF7FE55DA6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D534D5EF-B7E9-439E-BB7F-5BA0CE3B1BFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ancestry.Tests", "Ancestry.Tests\Ancestry.Tests.csproj", "{D1981B44-88F9-479E-BC04-7B7F5EEE9C94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,10 @@ Global
 		{36AC43F7-4F0B-43C3-8E45-50DF7FE55DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36AC43F7-4F0B-43C3-8E45-50DF7FE55DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36AC43F7-4F0B-43C3-8E45-50DF7FE55DA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1981B44-88F9-479E-BC04-7B7F5EEE9C94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1981B44-88F9-479E-BC04-7B7F5EEE9C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1981B44-88F9-479E-BC04-7B7F5EEE9C94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1981B44-88F9-479E-BC04-7B7F5EEE9C94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
